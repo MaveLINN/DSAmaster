@@ -1,14 +1,18 @@
-#define ll long long int 
 class Solution {
 public:
-    ll fib(int N) {
+    int dp[50];
+    int fib(int n) {
         
-        ll res = 1 ; 
-        ll a = 1LL*powl(1+sqrt(5),N);
-        ll b = 1LL*powl(1-sqrt(5),N);
-        ll c = 1LL*powl(2,N)*sqrt(5);
-        res = (a - b) / c ;
-        return res;
+        if(n == 1 || n == 2) return 1 ;
+        
+        if(n < 1)return 0 ;
+        
+        if(dp[n] != 0) return dp[n];
+        
+        int x = fib( n - 1) ;
+        int y = fib( n - 2) ;
+        
+        return dp[n] = x + y ;
         
     }
 };
