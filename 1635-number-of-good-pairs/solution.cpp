@@ -2,15 +2,17 @@ class Solution {
 public:
     int numIdenticalPairs(vector<int>& nums) {
         const int n = nums.size();
-        sort(nums.begin() , nums.end());
-        
-        int ct = 1 , res = 0 ;
-        for(int i = 0 ; i < n - 1 ; i++){
-            if(nums[i] == nums[i+1]) ct++ ;
-            else{ res += ct*(ct - 1)/2 ; ct = 1 ; }
+
+        int hp[101]={0};
+        for(int i = 0 ; i < n ; i++){
+            hp[nums[i]]++;
         }
-        
-        res += ct*(ct - 1)/2;
+        int res = 0 ;
+        for(int i = 1 ; i < 101 ; i++){
+            int k = hp[i];
+            res += k*(k-1)/2 ;
+        }
+
         return res ;
     }
 };
