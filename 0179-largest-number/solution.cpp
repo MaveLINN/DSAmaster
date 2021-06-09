@@ -1,23 +1,25 @@
 class Solution {
-public:    
-    string largestNumber(vector<int>& v) {
-                string ret="";
-        if(v.size() == 0)return ret;
-        std::vector<string> vs;
-for(int i = 0 ; i < v.size() ; i++){
-	vs.push_back(to_string(v[i]));
-}
-
-sort(vs.begin(), vs.end() , cmp);
-
-for(auto &i : vs)
-ret+= i ;
+public:
+    
+    string largestNumber(vector<int>& nums) {
+        const int n = nums.size();
         
-        if(ret[0] == '0')ret = "0";
-        return ret;
+        vector<string> v ;
+        for(auto &i : nums){
+            v.push_back(to_string(i));
+        }
+        
+        sort(v.begin() , v.end() , comp);
+        string res="";
+        for(auto &i : v)
+            res += i;
+        
+        if(res[0] == '0')res = '0';
+        
+        return res ;
     }
     
-     static bool cmp(string x, string y){
-        return stoll(x+y) > stoll(y+x);
+        static bool comp(string s1 , string s2){
+        return s1+s2 > s2+s1 ;
     }
 };
