@@ -1,18 +1,16 @@
 class Solution {
 public:
     int numIdenticalPairs(vector<int>& nums) {
-        const int n = nums.size();
-
-        int hp[101]={0};
-        for(int i = 0 ; i < n ; i++){
-            hp[nums[i]]++;
+        map<int,int> mp ; 
+        for(auto &i : nums){
+            mp[i]++;
         }
-        int res = 0 ;
-        for(int i = 1 ; i < 101 ; i++){
-            int k = hp[i];
-            res += k*(k-1)/2 ;
+        int res = 0 ; 
+        for(auto &i : mp){
+            int n = i.second ;
+            res += n*(n-1)/2;
         }
-
-        return res ;
+    
+    return res ;
     }
 };
