@@ -1,11 +1,12 @@
 class Solution {
 public:
-    bool containsDuplicate(vector<int>& v) {
-        const int n = v.size() ;
-        unordered_set<int > s ;
-        for(auto i : v)
-            s.insert(i);
+    bool containsDuplicate(vector<int>& nums) {
         
-        return n > s.size() ;
-    } 
+        unordered_set<int> st ; 
+        for(auto &i : nums){
+            st.insert(i);
+        }
+        
+        return st.size() == nums.size() ? false : true ; 
+    }
 };
