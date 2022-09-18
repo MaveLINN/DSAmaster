@@ -1,28 +1,26 @@
 class Solution {
 public:
-    int trap(vector<int>& v) {
-        const int n = v.size();
+    int trap(vector<int>& height) {
         
-        if( n == 0)return 0 ;
+        const int n = height.size();
+        if(!n)return 0 ;
+        vector<int> vl(n) , vr(n) ; // left array and right array 
         
-        int a[n],b[n];
-        memset( a , 0 , sizeof a);
-        memset( b , 0 , sizeof b);
-        
-        a[0] = v[0] ; b[n-1] = v[n-1] ;
-        for(int i = 1 ; i < n ; i++){
-	    a[i] = max( v[i], a[i-1]);
-        }
-
-         for(int i = n-2 ; i >= 0 ; i--){
-	    b[i] = max( v[i], b[i+1]);
+        vl[0] = height[0] , vr[n-1] = height[n-1];
+        for(int i = 1 ; i < n ; i++ ){
+            vl[i] = max(height[i],vl[i-1]); // finding the left max including                                                       current value 
         }
         
-        int ret = 0 ; 
+        for(int i = n-2 ; i >= 0 ; i-- ){
+            vr[i] = max(height[i],vr[i+1]); // finding the right max including the                                                  current value 
+        }
+        
+        int result = 0 ;
+        
         for(int i = 0 ; i < n ; i++){
-            ret += ( min(a[i],b[i]) - v[i]);
+            result += abs( min(vr[i],vl[i])  - height[i]) ;
         }
-
-        return ret ;
+        
+        return result ;
     }
 };
