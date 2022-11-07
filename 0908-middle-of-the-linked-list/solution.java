@@ -9,15 +9,27 @@
  * }
  */
 class Solution {
-    public ListNode middleNode(ListNode head) {
-        if(head == null) return head;
-        
-        ListNode s = head , f = head ;
-        
-        while(f != null && f.next != null){
-            s = s.next ;
-            f = f.next.next ;
+
+    int getLength(ListNode head){
+        ListNode temp = head ;
+        int x = 0 ;
+        while(temp != null){
+            temp = temp.next ;
+            x++ ;
         }
-        return s ;
+        return x ;
+    }
+
+    public ListNode middleNode(ListNode head) {
+        ListNode temp = head ;
+        int len = getLength(head) ;
+
+        len = (len/2)+1; // checking odd even , if odd the middle in one if even middle 
+
+        while(len > 1){
+            temp = temp.next ;
+            len-- ;
+        }
+        return temp ;
     }
 }
