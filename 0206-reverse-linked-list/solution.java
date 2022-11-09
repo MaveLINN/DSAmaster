@@ -10,20 +10,18 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
+
+        ListNode prev = null ; // it holds the previous node add 
+        ListNode next = head ; // it holds the next node add
+        ListNode curr = head ; // this is current node where we need to perform actions ,
+
+        while(next != null){
+            next = curr.next ; // first hold the next node add ,
+            curr.next = prev ; // then break the circuit and current next hold the previous node
+            prev = curr ;      // shift the previous to current 
+            curr = next ;       // shift the current node to next 
+        }
         
-        if(head == null) return head ;
-        ListNode curr = head ;
-        ListNode prev = null,temp = head;
-        
-        return recursive(curr,prev);
-        
-        
-    }
-    
-    public ListNode recursive(ListNode curr , ListNode prev){
-        if(curr == null) return prev ;
-        ListNode n = curr.next ;
-        curr.next = prev ;
-        return recursive(n,curr);
+        return prev ; // previous will hold the head once the LinkedList got reversed 
     }
 }
