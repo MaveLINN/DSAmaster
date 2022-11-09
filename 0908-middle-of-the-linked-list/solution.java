@@ -10,26 +10,15 @@
  */
 class Solution {
 
-    int getLength(ListNode head){
-        ListNode temp = head ;
-        int x = 0 ;
-        while(temp != null){
-            temp = temp.next ;
-            x++ ;
-        }
-        return x ;
-    }
-
     public ListNode middleNode(ListNode head) {
-        ListNode temp = head ;
-        int len = getLength(head) ;
+        ListNode slow = head ;
+        ListNode fast = head ;
 
-        len = (len/2)+1; // checking odd even , if odd the middle in one if even middle 
+        while(fast  != null && fast.next != null){ // odd and even Right covered in this
+            slow = slow.next ;
+            fast = fast.next.next ;
+        } // slow pointer is the answer 
 
-        while(len > 1){
-            temp = temp.next ;
-            len-- ;
-        }
-        return temp ;
+        return slow ;
     }
 }
