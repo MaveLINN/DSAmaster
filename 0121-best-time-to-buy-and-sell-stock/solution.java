@@ -1,0 +1,17 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int res = 0 , rightMax = -1;
+
+        List<Integer> list = new ArrayList<>();
+        list.add(-1);
+        for(int i = prices.length - 2 ; i>= 0 ; i--){
+            rightMax = Math.max(rightMax,prices[i+1]);
+            res = Math.max(rightMax-prices[i] , res);
+        }
+        return res ;
+    }
+}
+
+
+
+
