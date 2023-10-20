@@ -1,23 +1,37 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-        const int n = nums.size() ;
         
-        int z = 0 , pro = 1 , idx ;  
-        for(int i = 0 ; i < n ; ++i){
-            if(nums[i])  pro *= nums[i] ; 
-            else         pro *= 1 , z++ , idx = i ;   
+        int ctz = 0 ; 
+        int pro = 1 ;
+
+        for(auto &i : nums){
+            if(i != 0){
+             pro*= i;
+            }else ctz++ ;
         }
-        
-        vector<int> ret(n);
-        if(z == 0){
-            for(int i = 0 ; i < n ; i++)
-                ret[i] = pro/nums[i] ;
-        }else{
-            if( z == 1) ret[idx] = pro ;
+
+        vector<int> res(nums.size() , 0) ;
+        if(ctz > 1) return res ;
+        else if( ctz == 1){
+
+            for(int i = 0 ; i < nums.size() ; i++){
+                if(nums[i] != 0 ){
+                    res[i] = 0 ;
+                }
+                else res[i] = pro;
+            }
+
         }
-        
-        return ret ;
+        else {
+            for(int i = 0 ; i < nums.size() ; i++){
+                res[i] = pro/nums[i];
+            }
+
+        }
+        return res ;
+
     }
-        
 };
+
+
