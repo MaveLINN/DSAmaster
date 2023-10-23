@@ -1,19 +1,18 @@
 class Solution {
-
-    int[][] dp = new int[5005][303];
+    int[][] dp = new int[301][5001];
     public int change(int amount, int[] coins) {
-        for(int i  = 0 ; i < 5005 ; i++){
-            for(int j = 0 ; j < 303 ; j++){
+        for(int i = 0 ; i < 301 ; i++){
+            for(int j = 0 ; j < 5001 ; j++){
                 dp[i][j] = -1 ;
             }
         }
-        return solve(amount,coins,0);        
+     return solve(coins,coins.length - 1,0,amount);   
     }
 
-    public int solve(int amount , int[] coins , int i ){
-        if(amount == 0) return 1 ;
-        if(i >= coins.length || amount < 0 ) return 0 ;
-        if(dp[amount][i] != -1) return dp[amount][i] ;
-        return dp[amount][i] = solve(amount-coins[i],coins,i) + solve(amount,coins,i+1); 
+    int solve(int[] a , int n , int i , int target){
+        if(target == 0) return 1 ;
+        if(target < 0 || i > n) return 0 ;
+        if(dp[i][target] != -1 ) return dp[i][target] ;
+        return dp[i][target] = solve(a,n,i,target - a[i]) + solve(a,n,i+1,target) ;
     }
 }
