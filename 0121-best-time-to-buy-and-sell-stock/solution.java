@@ -1,17 +1,22 @@
 class Solution {
-    public int maxProfit(int[] prices) {
-        int res = 0 , rightMax = -1;
+    public int maxProfit(int[] p) {
 
-        List<Integer> list = new ArrayList<>();
-        list.add(-1);
-        for(int i = prices.length - 2 ; i>= 0 ; i--){
-            rightMax = Math.max(rightMax,prices[i+1]); // finding max in right side excluding current value
-            res = Math.max(rightMax-prices[i] , res);  // FINDING max result on spot and looping on . 
+        int[] a = new int[p.length];
+        int n = p.length ;
+        a[n - 1] = -1 ;
+        int mx = p[n - 1] ;
+
+        for(int i = n - 1 ; i >= 0 ; i--){
+            mx = Math.max(mx,p[i]);
+            a[i] = mx ;
         }
-        return res ;
+
+        int res = Integer.MIN_VALUE ;
+        for(int i = 0 ; i < n ; i++){
+            res = Math.max(res,Math.abs(a[i] - p[i]));
+        } 
+
+
+        return  res ; 
     }
 }
-
-
-
-
