@@ -1,19 +1,12 @@
 class Solution {
-    public String gcdOfStrings(String s1, String s2) {
-        
-        if(!(s1+s2).equals(s2+s1)) return "";
-        int x = gcd(s1.length(),s2.length());
-
-        System.out.print(x);
-
-        return s2.substring(0,x) ;
-
+    public String gcdOfStrings(String str1, String str2) {
+        if(!(str1+str2).equals(str2+str1)) return "";
+        int gcdValue = gcd(str1.length(),str2.length());
+        return str1.substring(0,gcdValue);
     }
 
-    public int gcd(int a , int b ){
+    public int gcd(int a , int b){
         if(b == 0) return a ;
-        return gcd(b,a%b) ;
+        return gcd(b,a%b);
     }
 }
-
-
