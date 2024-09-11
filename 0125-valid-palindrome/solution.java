@@ -1,18 +1,15 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        String res = s.toLowerCase(); // first converting to lower case 
+        return checkPalindrome(s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase());
+    }
 
-        String newString = ""; 
-        for(int i = 0 ; i < res.length() ; i++){ // this is for new string taking only alphanumeric characters 
-            int x = (int)res.charAt(i);
-            if( (x >= 48 && x <= 57) || (x >= 65 && x <= 90) || (x >= 97 && x <= 122) )
-            newString += res.charAt(i);
+    boolean checkPalindrome(String s){
+        char[] c = s.toCharArray();
+        int n = c.length ;
+        for(int i = 0 ; i < n/2 ;i++){
+            if(c[i] != c[n-i-1])
+            return false;
         }
-
-        for(int i = 0 ; i < newString.length() ; i++){ // this is for checking the palindrome case 
-            if(newString.charAt(i) != newString.charAt(newString.length()-i-1)) return false;
-        }
-
-        return true ;
+        return true;
     }
 }
