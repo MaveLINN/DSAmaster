@@ -8,22 +8,18 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-
-
 class Solution {
     public ListNode reverseList(ListNode head) {
+        ListNode curr = head ; 
+        ListNode prev = null ;
+        ListNode nextt = head ;
 
-        ListNode prev = null ; // it holds the previous node add 
-        ListNode next = head ; // it holds the next node add
-        ListNode curr = head ; // this is current node where we need to perform actions ,
-
-        while(next != null){
-            next = curr.next ; // first hold the next node add ,
-            curr.next = prev ; // then break the circuit and current next hold the previous node
-            prev = curr ;      // shift the previous to current 
-            curr = next ;       // shift the current node to next 
+        while(nextt != null){
+            nextt = curr.next;
+            curr.next = prev;
+            prev = curr ;
+            curr = nextt;
         }
-        
-        return prev ; // previous will hold the head once the LinkedList got reversed 
+        return prev;
     }
 }
