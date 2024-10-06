@@ -11,15 +11,16 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-
-        Map<ListNode,Boolean> mp = new HashMap<>(); // map for storing the address of node
-        ListNode temp = head ;
-
-        while(temp != null){
-            if(mp.containsKey(temp)){       // if node address present , it means we already reached there , hence cycle exist.
-                return true ;
-            }else mp.put(temp,true);       // not present then , put it into map .
-            temp = temp.next ;
+        
+        ListNode slow = head ; 
+        ListNode fast = head ;
+        
+        while(fast != null && fast.next != null){
+            slow = slow.next ;
+            fast = fast.next.next ;
+            
+        if(slow == fast)
+            return true ;
         }
         return false ;
     }
