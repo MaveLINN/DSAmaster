@@ -1,31 +1,21 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
-        Set<List<Integer>> st = new HashSet<>();
-        solve(nums,st,list,0);
-
-        for(List<Integer> i : st ){
-            res.add(i);
-        }
-        return res ;
+        solve(nums,0,res,list);
+        return res.stream().distinct().collect(Collectors.toList()); // to find distinct lists
     }
-
-    public void solve(int[] a , Set<List<Integer>> st , List<Integer> list , int i){
-
-        if(i == a.length){
-            List<Integer> check = new ArrayList<>(list);
-            Collections.sort(check);
-            st.add(check);
-            return ;
+    
+        public static void solve(int[] a , int idx , List<List<Integer>> res ,List<Integer> list ){
+        if(idx == a.length){
+            List<Integer> temp = new ArrayList<>(list);
+            Collections.sort(temp);
+            res.add(temp);
+            return;
         }
-
-        list.add(a[i]);
-        solve(a,st,list,i+1);
-        list.remove(list.size() - 1);
-        solve(a,st,list,i+1);
-
-
+        list.add(a[idx]);
+        solve(a,idx+1,res,list);
+        list.remove(list.size() - 1 );
+        solve(a,idx+1,res,list);
     }
 }
