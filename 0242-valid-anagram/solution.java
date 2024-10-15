@@ -13,7 +13,8 @@ class Solution {
         hash[(int)t.charAt(i) - 97]--;
     }
 
-    for(int i = 0 ; i < 26 ; i++){      // if the element of hash array is 0 . it means all the alphabets are used and return true . If not equal to zero it means some alphabets are extra which not used and return false .
+    for(int i = 0 ; i < 26 ; i++){      // if the element of hash array is 0 . it means all the alphabets are used and return true . 
+                                        // If not equal to zero it means some alphabets are extra which not used and return false .
         if(hash[i] != 0) return false ;
     }
     return true ;
