@@ -15,33 +15,33 @@
  */
 class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> l = new ArrayList<>();
 
-        List<List<Integer>> list = new ArrayList<List<Integer>>();
-        List<Integer> ans = new ArrayList<>();
-
-        if(root == null)
-        return list ;
-
+        if(root == null) return res ;
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
         q.offer(null);
 
         while(!q.isEmpty()){
-            TreeNode node = q.poll();
-            if(node == null){
-                list.add(0,new ArrayList(ans)); // It is same as level order Traversal , but here adding the list from front . That's it .
-                ans.clear();
+            TreeNode nod = q.poll();
 
-                if(q.isEmpty())
-                    break;
-                else q.offer(null);
+            if(nod == null){
+
+                    res.add(0,new ArrayList<>(l));
+                    l.clear();
+                                    if(!q.isEmpty()){
+                    q.offer(null);
+                }else break;
             }
             else{
-                ans.add(node.val);
-                if(node.left != null) q.offer(node.left);
-                if(node.right != null) q.offer(node.right);
+                l.add(nod.val);
+                if(nod.left != null)q.offer(nod.left);
+                if(nod.right != null)q.offer(nod.right);
             }
+
         }
-        return list ;
+
+        return res ;
     }
 }
