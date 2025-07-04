@@ -15,35 +15,33 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> l = new ArrayList<>();
 
-        List< List<Integer> > list = new ArrayList< List<Integer> >();
-
-        if(root == null)
-        return list ;
-
+        if(root == null) return res ;
         Queue<TreeNode> q = new LinkedList<>();
-        List<Integer> ans = new ArrayList<>();
-        q.offer(root); // initial push in queue
-        q.offer(null); // this null will tell to add the list to list Of list .. like  3 N 9 20 N 15 7 N 
+        q.offer(root);
+        q.offer(null);
 
         while(!q.isEmpty()){
-            TreeNode node = q.poll();
+            TreeNode nod = q.poll();
 
-            if(node == null){ // it means to change the new line 
-                list.add(new ArrayList(ans)); // adding the existing list to result .
-                ans.clear(); 
-                                  
-                if(q.isEmpty()) // if empty means there is no node after that .
-                    break ;
-                else q.offer(null); // if value exist after null , then we need to insert the null again   
+            if(nod == null){
+
+                    res.add(new ArrayList<>(l));
+                    l.clear();
+                                    if(!q.isEmpty()){
+                    q.offer(null);
+                }else break;
             }
             else{
-                ans.add(node.val);
-                if(node.left != null) q.offer(node.left);
-                if(node.right != null)q.offer(node.right);
+                l.add(nod.val);
+                if(nod.left != null)q.offer(nod.left);
+                if(nod.right != null)q.offer(nod.right);
             }
 
         }
-        return list ;
+
+        return res ;
     }
 }
