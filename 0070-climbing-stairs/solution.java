@@ -1,11 +1,14 @@
 class Solution {
-    int[] dp = new int[50];
+    int[] dp;
     public int climbStairs(int n) {
-        if(n == 0) return 1;
-        if(n < 0) return 0 ;
+        dp = new int[46];
+        // for(int i : dp) i = -1;
+        return solve(n);
+    }
+
+    public int solve(int n){
+        if(n <= 2) return n ;
         if(dp[n] != 0) return dp[n];
-        int x = climbStairs(n-1);
-        int xx = climbStairs(n-2);
-        return dp[n] = x + xx ;
+        return dp[n] = solve(n - 1) + solve(n-2);
     }
 }
