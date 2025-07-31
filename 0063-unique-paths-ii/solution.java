@@ -1,22 +1,24 @@
 class Solution {
-    int[][] dp = new int[101][101];
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        int n = obstacleGrid.length ;
-        int m = obstacleGrid[0].length ;
-        
-        for(int i = 0 ; i < 101 ; i++){
-            for(int j = 0 ; j < 101 ; j++){
+    int[][] dp ;
+    public int uniquePathsWithObstacles(int[][] a) {
+    
+        int n = a.length ;
+        int m = a[0].length ;
+        dp = new int[n][m];
+
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
                 dp[i][j] = -1 ;
             }
         }
-        return solve(obstacleGrid,n-1,m-1);
+        return solve(a,n-1,m-1);
     }
 
-    int solve(int[][] a , int n , int m ){
+    public int solve(int[][] a , int i , int j){
+        if(i < 0 || j < 0 || a[i][j] == 1) return 0;
+        if(i == 0 && j == 0) return 1 ;
+        if(dp[i][j] != -1) return dp[i][j];
+        return dp[i][j] = solve(a,i,j-1) + solve(a,i-1,j);
 
-            if(m < 0 || n < 0 || a[n][m] == 1 ) return 0;
-            if( n == 0 && m == 0) return 1 ;
-            if(dp[n][m] != -1 ) return dp[n][m] ; 
-            return dp[n][m] = solve(a,n,m-1) + solve(a,n-1,m);
     }
 }
