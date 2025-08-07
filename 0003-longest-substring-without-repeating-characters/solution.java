@@ -1,15 +1,19 @@
 class Solution {
-    public static int lengthOfLongestSubstring(String s) {
-       int[] a = new int[256];
-       for(int i = 0 ; i < 256 ; i++)a[i] = -1;
-       int check = -1 , res = 0 ;
-       for(int i = 0 ; i < s.length() ; i++){
-           if(a[s.charAt(i)] > check ){
-               check = a[s.charAt(i)];
-           }
-           a[s.charAt(i)] = i ;
-           res = Math.max(res,i-check);
-       }
+    public int lengthOfLongestSubstring(String s) {
+
+        int[] has = new int[256];
+        Arrays.fill(has,-1);
+        int check = -1 , res = 0 ;
+
+        int n = s.length();
+        for(int i = 0 ; i < n ; i++){
+            if(has[s.charAt(i)] > check){
+                check = has[s.charAt(i)];
+            }
+            res = Math.max(res , i - check);
+            has[s.charAt(i)] = i ;
+        }
+        
         return res ;
     }
 }
