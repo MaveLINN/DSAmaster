@@ -1,12 +1,14 @@
 class Solution {
-    public static int maxProfit(int[] prices) {
+    public int maxProfit(int[] prices) {
+        int n = prices.length ;
+        int mx = prices[n-1];
 
-        int n = prices.length;
-        int maxi = prices[n-1] , res = 0 ;
-        for(int i = n-1 ; i >= 0 ; i--){
-            maxi = Math.max(maxi,prices[i]);  // finding max in right side excluding current value
-            res = Math.max(res,maxi - prices[i]); // FINDING max result on spot and looping on . 
+        int res = 0 ;
+        for(int i = n - 2 ; i >= 0 ; i--){
+            res = Math.max(res, mx - prices[i]);
+            mx = Math.max(mx,prices[i]);
         }
+
         return res ;
     }
 }
