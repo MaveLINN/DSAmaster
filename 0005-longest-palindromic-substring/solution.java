@@ -1,28 +1,30 @@
 class Solution {
-    public static String longestPalindrome(String s) {
-        int n = s.length() , res = 0 , maxLength = -1 , startIndex = 0;
-        String resString = "";
-        for (int i = 0 ; i < n ; i++){
-            int x = palin(s,i,i);
-            int xx = palin(s,i,i+1);
-            res = Math.max(x,xx);
+    public String longestPalindrome(String s) {
 
-            if(res > maxLength){
-                maxLength = res;
-                startIndex = i - ((maxLength - 1)/2);
+        int n = s.length();
+        int resLength = 0 ;
+        String resString = "";
+        int startIndex = 0 , maxLength = 0 ;
+        for(int i = 0 ; i < n ; i++){
+            int x = palendrome(s,i,i);
+            int xx = palendrome(s,i,i+1);
+            resLength = Math.max(x,xx);
+        
+            if(resLength > maxLength){
+                maxLength = resLength ;
+                startIndex = i - ((maxLength-1)/2);
             }
         }
-        resString = s.substring(startIndex,startIndex+maxLength);
+        resString = s.substring(startIndex,startIndex + maxLength);
         return resString ;
     }
 
-    public static int palin(String s, int l , int r){
-        while(l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)){
-            l--;r++;
+    int palendrome(String s , int l , int r){
+        while(l >=0 && r < s.length() && s.charAt(l) == s.charAt(r)){
+            l-- ; r++ ;
         }
         return r-l-1;
     }
-
-    // racecar
-    // abccba
+ // 01  2345678  9 10
+ // ca  racecar  v c
 }
