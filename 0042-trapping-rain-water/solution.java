@@ -1,24 +1,14 @@
 class Solution {
-    public int trap(int[] a) {
-        int n = a.length ;
+    public int trap(int[] height) {
+        int n = height.length ;
+
         int[] leftMax = new int[n];
+        leftMax[0] = height[0];
         int[] rightMax = new int[n];
+        rightMax[n-1] = height[n-1];
 
-        leftMax[0] = a[0];
-        rightMax[n-1] = a[n-1];
-
-        for(int i = 1 ; i < n ; i++){
-            leftMax[i] = Math.max(leftMax[i-1],a[i]);
-        }
-
-        for(int i = n - 2 ; i > -1 ; i--){
-            rightMax[i] = Math.max(rightMax[i+1],a[i]);
-        }
-
-        int final_water_Stored = 0 ;
-        for (int i = 0 ; i < n ; i++){
-            final_water_Stored += Math.abs( Math.min(leftMax[i],rightMax[i]) - a[i]);
-        }
-        return final_water_Stored ;
+        IntStream.range(1,n).forEach( i -> leftMax[i] = Math.max(leftMax[i-1],height[i]) );
+        IntStream.range(0,n-1).map(i-> n-i-2).forEach(i-> rightMax[i] = Math.max(rightMax[i+1],height[i]));
+        return IntStream.range(0,n).map(i-> Math.abs(Math.min(leftMax[i],rightMax[i]) - height[i])).sum();
     }
 }
